@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 @RestController
 public class EmployeeController {
+    //hashmap as db
     private HashMap<Integer, Employee> empDb = new HashMap<>();
 
     @PostMapping("/add-employee")

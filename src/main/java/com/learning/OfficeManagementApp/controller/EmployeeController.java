@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
 
     @Autowired
@@ -33,5 +34,10 @@ public class EmployeeController {
     @PutMapping("/update-salary")
     public Employee updateSalary(@RequestParam("id") int employeeId, @RequestParam("new-salary") int newSalary ){
         return employeeService.updateSalary(employeeId, newSalary);
+    }
+
+    @GetMapping("get-highest-salary")
+    public Employee getHighestSalary(){
+        return employeeService.getHighestSalaryEmployee();
     }
 }

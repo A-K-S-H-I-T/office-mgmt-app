@@ -34,4 +34,8 @@ public class EmployeeService {
     public Employee updateSalary(int employeeId, int newSalary) {
         return employeeRepository.updateSalary(employeeId, newSalary);
     }
+
+    public Employee getHighestSalaryEmployee(){
+        return employeeRepository.getHighestSalaryEmployee();
+    }
 }

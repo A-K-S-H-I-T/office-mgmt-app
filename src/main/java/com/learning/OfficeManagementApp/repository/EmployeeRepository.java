@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class EmployeeRepository {
 
     //hashmap as db
-    private HashMap<Integer, Employee> empDb = new HashMap<>();
+    final HashMap<Integer, Employee> empDb = new HashMap<>();
 
     public void addEmployee(Employee employee) {
         empDb.put(employee.getEmp_id(), employee);
@@ -27,5 +27,18 @@ public class EmployeeRepository {
         Employee employee = empDb.get(employeeId);
         employee.setSalary(newSalary);
         return employee;
+    }
+
+    public Employee getHighestSalaryEmployee(){
+        int maxSalary = 0;
+        Employee highestSalaryEmployee = null;
+        for(int employeeId : empDb.keySet()){
+            Employee currEmployee = empDb.get(employeeId);
+            if(currEmployee.getSalary() > maxSalary) {
+                maxSalary = currEmployee.getSalary();
+                highestSalaryEmployee = currEmployee;
+            }
+        }
+        return highestSalaryEmployee;
     }
 }

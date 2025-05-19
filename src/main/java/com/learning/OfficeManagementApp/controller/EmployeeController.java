@@ -1,29 +1,43 @@
 package com.learning.OfficeManagementApp.controller;
 
 import com.learning.OfficeManagementApp.model.Employee;
+import com.learning.OfficeManagementApp.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
-    //hashmap as db
-    private HashMap<Integer, Employee> empDb = new HashMap<>();
+
+    @Autowired
+    private EmployeeService employeeService;
 
     @PostMapping("/add-employee")
     public String addEmployee(@RequestBody Employee employee){
-        empDb.put(employee.getEmp_id(), employee);
+        employeeService.addEmployee(employee);
         return "Employee added successfully!!";
     }
 
     @GetMapping("/get-employee")
     public Employee getEmployee(@RequestParam("id") int employee_id){
-        return empDb.get(employee_id);
+        return employeeService.getEmployee(employee_id);
     }
 
     @DeleteMapping("/delete-employee/{id}")
     public String deleteEmployee(@PathVariable("id") int employee_id){
-        empDb.remove(employee_id);
+        employeeService.deleteEmployee(employee_id);
         return "Employee deleted successfully!!";
+    }
+
+    @PutMapping("/update-salary")
+    public Employee updateSalary(@RequestParam("id") int employeeId, @RequestParam("new-salary") int newSalary ){
+        return employeeService.updateSalary(employeeId, newSalary);
+    }
+
+    @GetMapping("get-highest-salary")
+    public Employee getHighestSalary(){
+        return employeeService.getHighestSalaryEmployee();
     }
 }
